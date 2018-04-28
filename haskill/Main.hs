@@ -24,11 +24,11 @@ handleKey :: Event -> World -> World
 handleKey (EventKey (Char 'q') Down _ _) w            = playStrikeP1 w
 handleKey (EventKey (Char 'w') Down _ _) w            = playHealP1 w
 handleKey (EventKey (Char 'e') Down _ _) w            = playBashP1 w
-handleKey (EventKey (Char 'r') Down _ _) w            = useEnergyP1 w
+handleKey (EventKey (Char 'r') Down _ _) w            = manaBlastP1 w
 
 handleKey (EventKey (Char 'z') Down _ _) w            = playStrikeP2 w
 handleKey (EventKey (Char 'x') Down _ _) w            = playHealP2 w
 handleKey (EventKey (Char 'c') Down _ _) w            = playBashP2 w
-handleKey (EventKey (Char 'v') Down _ _) w            = useEnergyP2 w
+handleKey (EventKey (Char 'v') Down _ _) w            = manaBlastP2 w
 
 handleKey _ w = w

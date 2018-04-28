@@ -93,16 +93,7 @@ checkEnergy oldball newball energy
                                 
   | otherwise                 = energy
 
-
-useEnergyP1 :: World -> World
-useEnergyP1 (World p b s e1 e2 h1 h2) =
-  if e1 >= 1 then World p b s (e1 - 1) e2 h1 h2 else World p b s e1 e2 h1 h2
-
-useEnergyP2 :: World -> World
-useEnergyP2 (World p b s e1 e2 h1 h2) =
-  if e2 >= 1 then World p b s e1 (e2 - 1) h1 h2 else World p b s e1 e2 h1 h2
-
--- Strikes - Cost: 1, Damage: 5, Heal: 0
+-- Strike - Cost: 1, Damage: 5, Heal: 0
 playStrikeP1 :: World -> World
 playStrikeP1 (World p b s e1 e2 h1 h2) =
   if e1 >= 1 then World p b s (e1 - 1) e2 h1 (h2 - 5) else World p b s e1 e2 h1 h2
@@ -111,7 +102,7 @@ playStrikeP2 :: World -> World
 playStrikeP2 (World p b s e1 e2 h1 h2) =
   if e2 >= 1 then World p b s e1 (e2 - 1) (h1 - 5) h2 else World p b s e1 e2 h1 h2
 
--- Heals - Cost: 1, Damage: 0, Heal: 5
+-- Heal - Cost: 1, Damage: 0, Heal: 5
 playHealP1 :: World -> World
 playHealP1 (World p b s e1 e2 h1 h2) =
   if e1 >= 1 then World p b s (e1 - 1) e2 (h1 + 5) h2 else World p b s e1 e2 h1 h2
@@ -128,3 +119,12 @@ playBashP1 (World p b s e1 e2 h1 h2) =
 playBashP2 :: World -> World
 playBashP2 (World p b s e1 e2 h1 h2) =
   if e2 >= 2 then World p b s e1 (e2 - 2) (h1 - 12) h2 else World p b s e1 e2 h1 h2
+
+-- Mana Blast - Cost: 5, Damage: 3xTotalEnergy, Heal: 12
+manaBlastP1 :: World -> World
+manaBlastP1 (World p b s e1 e2 h1 h2) =
+  if e1 >= 5 then World p b s 0 e2 (h1 + 12) (h2 - 3*e1) else World p b s e1 e2 h1 h2
+
+manaBlastP2 :: World -> World
+manaBlastP2 (World p b s e1 e2 h1 h2) =
+  if e2 >= 5 then World p b s e1 0 (h1 - 3*e2) (h2 + 12) else World p b s e1 e2 h1 h2
