@@ -1,10 +1,10 @@
 # Haskill
-## A live 2 player card battle game. 
+## A live 2 player card battle game., written in Haskell. 
 
-To build - 
+To build -  
 `$ ghc --make haskill/Main.hs`
 
-To run -
+To run -  
 `$ ./Main`
 
 ## The Game
