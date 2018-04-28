@@ -11,12 +11,17 @@ data World = World Paddle Ball Score
 
 -- starting world
 genesis :: World
-genesis =  World (Paddle 0.0 (-240.0) 128 32 0.0)
-                 (Ball 0.0 0.0 8.0 308.0 308.0)
+genesis =  World (Paddle 0.0 (-400) 400 32 0.0)
+                 (Ball 0.0 0.0 8.0 0 250)
                  0
            
 -- display text in the top-left corner
-drawText message = Translate (-390) 288
+drawTextL message = Translate (-390) 288
+                 $ Color white
+                 $ Scale 0.1 0.1
+                 $ Text message
+
+drawTextR message = Translate (300) 288
                  $ Color white
                  $ Scale 0.1 0.1
                  $ Text message
@@ -25,8 +30,11 @@ drawText message = Translate (-390) 288
 drawEntities :: World -> Picture
 drawEntities (World p b s) = Pictures [ render p
                                       , render b
-                                      , drawText 
-                                        $ "Score: " ++ show s]
+                                      , drawTextL 
+                                        $ "Score: " ++ show s
+                                      , drawTextR 
+                                       $ "Score: " ++ show s
+                                        ]
 
 -- move the paddle based on its velocity, check if the ball bounces, and check
 -- if score needs to be reset or incremented
@@ -46,7 +54,7 @@ checkScore :: Ball -> Ball -> Score -> Score
 checkScore oldball newball score
   -- if the ball has hit the bottom, reset score
   | bottom newball <= (-290.0) && 
-    bottom oldball > (-290.0) = 0
+    bottom oldball > (-290.0) = score + 1 
                                 
   -- if the ball has hit the ceiling, increment score
   | top newball >= 290.0 &&  

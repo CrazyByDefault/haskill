@@ -21,7 +21,7 @@ instance Entity Ball where
   move ball time = let (Ball x y r xv yv) = ball
                    in Ball (x + xv * time) (y + yv * time) r xv yv
   
-  render ball = Color (makeColor 0.7 0.2 0.3 1.0)
+  render ball = Color black
               $ uncurry Translate  (center ball)
               $ ThickCircle 1.0 (width ball)
 
