@@ -2,6 +2,7 @@
 ## A live 2 player card battle game., written in Haskell. 
 
 To build -  
+`$ cabal install gloss`
 `$ ghc --make haskill/Main.hs`
 
 To run -  
