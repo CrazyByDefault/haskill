@@ -119,3 +119,12 @@ playHealP1 (World p b s e1 e2 h1 h2) =
 playHealP2 :: World -> World
 playHealP2 (World p b s e1 e2 h1 h2) =
   if e2 >= 1 then World p b s e1 (e2 - 1) h1 (h2 + 5) else World p b s e1 e2 h1 h2
+
+-- Bash - Cost: 2, Damage: 12, Heal: 0
+playBashP1 :: World -> World
+playBashP1 (World p b s e1 e2 h1 h2) =
+  if e1 >= 2 then World p b s (e1 - 2) e2 h1 (h2 - 12) else World p b s e1 e2 h1 h2
+
+playBashP2 :: World -> World
+playBashP2 (World p b s e1 e2 h1 h2) =
+  if e2 >= 2 then World p b s e1 (e2 - 2) (h1 - 12) h2 else World p b s e1 e2 h1 h2
