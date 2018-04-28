@@ -24,7 +24,7 @@ drawing = pictures
 -- ourPicture = bitmapOfByteString 100 100 (BitmapFormat TopToBottom PxRGBA) bitmapData True
 
 main :: IO ()
-main =  animate (InWindow "t" (400,400) (800,0)) white pictures[texture1] -- (Circle 80)
+main =  animate (InWindow "t" (400,400) (800,0)) white draw -- (Circle 80)
 
 draw :: Float -> Picture
 draw t
