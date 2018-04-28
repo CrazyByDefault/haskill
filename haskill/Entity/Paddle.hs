@@ -12,7 +12,7 @@ changeDir :: Paddle -> Float -> Paddle
 changeDir (Paddle x y w h v) = Paddle x y w h
 
 
-paddleColor = Color (makeColor 0.6 0.6 0.6 1.0)
+paddleColor = Color (makeColor 0.6 0.6 0.6 0.0)
 
 instance Entity Paddle where
   center (Paddle x y _ _ _)  = (x, y)
