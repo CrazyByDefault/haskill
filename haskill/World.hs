@@ -7,8 +7,9 @@ import Entity.Ball
 
 type Score = Int
 type Energy = Int
+type Health = Int
 
-data World = World Paddle Ball Score Energy Energy
+data World = World Paddle Ball Score Energy Energy Health Health
 -- data World = World Paddle Ball Score
 
 -- starting world
@@ -18,14 +19,26 @@ genesis =  World (Paddle 0.0 (-240.0) 128 32 0.0)
                  0
                  0
                  0
+                 100
+                 100
            
 -- display text in the top-left corner
-drawTextLeft message = Translate (-390) 288
+drawTextTL message = Translate (-390) 288
                  $ Color white
                  $ Scale 0.1 0.1
                  $ Text message
 
-drawTextRight message = Translate (315) 288
+drawTextTR message = Translate (305) 288
+                 $ Color white
+                 $ Scale 0.1 0.1
+                 $ Text message
+
+drawTextBL message = Translate (-390) (-288)
+                 $ Color white
+                 $ Scale 0.1 0.1
+                 $ Text message
+
+drawTextBR message = Translate (315) (-288)
                  $ Color white
                  $ Scale 0.1 0.1
                  $ Text message
@@ -33,17 +46,22 @@ drawTextRight message = Translate (315) 288
 
 -- draw the paddle, ball, and score
 drawEntities :: World -> Picture
-drawEntities (World p b s e1 e2) = Pictures [ render p
+drawEntities (World p b s e1 e2 h1 h2) = Pictures [ render p
                                       , render b
-                                      , drawTextLeft 
+                                      , drawTextTL 
                                         $ "Energy 1: " ++ show e1
-                                      , drawTextRight
-                                        $ "Energy 2: " ++ show e2 ]
+                                      , drawTextTR
+                                        $ "Energy 2: " ++ show e2
+                                      , drawTextBL
+                                        $ "Health : " ++ show h1
+                                      , drawTextBR
+                                        $ "Health : " ++ show h2 ]
 
 -- move the paddle based on its velocity, check if the ball bounces, and check
 -- if score needs to be reset or incremented
 moveEntities :: Float -> World -> World
-moveEntities time (World p b s e1 e2) = let p' = move p time; b' = ballMove b p time; s'  = checkScore b b' s; e1' = checkEnergy b b' e1; e2' = checkEnergy b b' e2 in World p' b' s' e1' e2'
+moveEntities time (World p b s e1 e2 h1 h2) =
+  let p' = move p time; b' = ballMove b p time; s'  = checkScore b b' s; e1' = checkEnergy b b' e1; e2' = checkEnergy b b' e2 in World p' b' s' e1' e2' h1 h2
 
 -- Change the paddle's velocity to the given float 
 -- movePaddle :: World -> Float -> World
@@ -76,8 +94,28 @@ checkEnergy oldball newball energy
   | otherwise                 = energy
 
 
-useEnergyP1 :: World -> Int -> World
-useEnergyP1 (World p b s e1 e2) used = if e1 >= used then World p b s (e1 - used) e2 else World p b s e1 e2
+useEnergyP1 :: World -> World
+useEnergyP1 (World p b s e1 e2 h1 h2) =
+  if e1 >= 1 then World p b s (e1 - 1) e2 h1 h2 else World p b s e1 e2 h1 h2
 
-useEnergyP2 :: World -> Int -> World
-useEnergyP2 (World p b s e1 e2) used = if e2 >= used then World p b s e1 (e2 - used) else World p b s e1 e2
+useEnergyP2 :: World -> World
+useEnergyP2 (World p b s e1 e2 h1 h2) =
+  if e2 >= 1 then World p b s e1 (e2 - 1) h1 h2 else World p b s e1 e2 h1 h2
+
+-- Strikes - Cost: 1, Damage: 5, Heal: 0
+playStrikeP1 :: World -> World
+playStrikeP1 (World p b s e1 e2 h1 h2) =
+  if e1 >= 1 then World p b s (e1 - 1) e2 h1 (h2 - 5) else World p b s e1 e2 h1 h2
+
+playStrikeP2 :: World -> World
+playStrikeP2 (World p b s e1 e2 h1 h2) =
+  if e2 >= 1 then World p b s e1 (e2 - 1) (h1 - 5) h2 else World p b s e1 e2 h1 h2
+
+-- Heals - Cost: 1, Damage: 0, Heal: 5
+playHealP1 :: World -> World
+playHealP1 (World p b s e1 e2 h1 h2) =
+  if e1 >= 1 then World p b s (e1 - 1) e2 (h1 + 5) h2 else World p b s e1 e2 h1 h2
+
+playHealP2 :: World -> World
+playHealP2 (World p b s e1 e2 h1 h2) =
+  if e2 >= 1 then World p b s e1 (e2 - 1) h1 (h2 + 5) else World p b s e1 e2 h1 h2
