@@ -20,8 +20,6 @@ drawing = pictures
     ballColor = addColors (bright yellow) orange
     paddleColor = light (bright red)
 
-Render :: IO()
-texture1 <- loadBMP "./VENUS.BMP"
 -- ourPicture :: Picture
 -- ourPicture = bitmapOfByteString 100 100 (BitmapFormat TopToBottom PxRGBA) bitmapData True
 
