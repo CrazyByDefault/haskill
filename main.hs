@@ -19,8 +19,7 @@ drawing = pictures
 
 drawing1 :: Picture
 drawing1 = pictures
-  [     translate (0) ((last dimensions)/4) $ color ballColor $ rectangleSolid (head dimensions/8) (last dimensions/4)
-
+  [  translate (0) ((last dimensions)/4) $ color ballColor $ rectangleSolid (head dimensions/8) (last dimensions/4)
   ,  translate (0) ((last dimensions/9)-(last dimensions)/2) $ color ballColor $ rectangleSolid (head dimensions/8) (last dimensions/4)
   ]
   where
