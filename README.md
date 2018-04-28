@@ -22,3 +22,11 @@ The keybinds for P1 are Q, W, E and R, and for P2 are Z, X, C and V.
 ## What we did
 
 This game is based off of an old Haskell game of pong, which we repurposed for our use. The ball has been made invisible, and acts as our timer. We chose this approach over using the inbuilt time function as controlling the velocity of the ball gives us greater control over the rate at which players gain energy.
+
+The project is based on [Gloss](https://hackage.haskell.org/package/gloss)
+
+## TODO - 
+
+* Assets
+* More moves for players
+* Variety of players with different movesets
