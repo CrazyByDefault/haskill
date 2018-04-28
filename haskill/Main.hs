@@ -7,7 +7,7 @@ pVel :: Float
 pVel   = 310.0                                 -- paddle velocity
 
 window :: Display
-window = InWindow "Gloss Pong" (800, 600) (10, 10)
+window = InWindow "Haskill" (800, 600) (10, 10)
 
 main :: IO ()
 main = play 

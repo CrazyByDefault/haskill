@@ -56,7 +56,7 @@ checkScore :: Ball -> Ball -> Score -> Score
 checkScore oldball newball score
   -- if the ball has hit the bottom, reset score
   | bottom newball <= (-290.0) && 
-    bottom oldball > (-290.0) = 0
+    bottom oldball > (-290.0) = score + 1 
                                 
   -- if the ball has hit the ceiling, increment score
   | top newball >= 290.0 &&  
