@@ -1,5 +1,5 @@
-#Haskill
-##A live 2 player card battle game. 
+# Haskill
+## A live 2 player card battle game. 
 
 To build - 
 `$ ghc --make haskill/Main.hs`
@@ -7,7 +7,7 @@ To build -
 To run -
 `$ ./Main`
 
-##The Game
+## The Game
 
 The game is a live 2 player card battle game. Each player (left and right) has energy that increases with time, as well as health.
 
