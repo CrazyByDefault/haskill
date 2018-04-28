@@ -78,3 +78,6 @@ checkEnergy oldball newball energy
 
 useEnergyP1 :: World -> Int -> World
 useEnergyP1 (World p b s e1 e2) used = if e1 >= used then World p b s (e1 - used) e2 else World p b s e1 e2
+
+useEnergyP2 :: World -> Int -> World
+useEnergyP2 (World p b s e1 e2) used = if e2 >= used then World p b s e1 (e2 - used) else World p b s e1 e2

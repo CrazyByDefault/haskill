@@ -21,14 +21,14 @@ main = play
        
 -- handle a or d keys to move left or right
 handleKey :: Event -> World -> World
-handleKey (EventKey (Char 'a') Down _ _) w            = useEnergyP1 w 1
--- handleKey (EventKey (Char 'a') Up _ _) w              = movePaddle w 0.0
--- handleKey (EventKey (SpecialKey KeyLeft) Down _ _) w  = movePaddle w (-pVel)
--- handleKey (EventKey (SpecialKey KeyLeft) Up _ _) w    = movePaddle w 0.0
+handleKey (EventKey (Char 'q') Down _ _) w            = useEnergyP1 w 1
+handleKey (EventKey (Char 'w') Down _ _) w            = useEnergyP1 w 2
+handleKey (EventKey (Char 'e') Down _ _) w            = useEnergyP1 w 3
+handleKey (EventKey (Char 'r') Down _ _) w            = useEnergyP1 w 4
 
--- handleKey (EventKey (Char 'd') Down _ _) w            = movePaddle w pVel
--- handleKey (EventKey (Char 'd') Up _ _) w              = movePaddle w 0.0
--- handleKey (EventKey (SpecialKey KeyRight) Down _ _) w = movePaddle w pVel
--- handleKey (EventKey (SpecialKey KeyRight) Up _ _) w   = movePaddle w 0.0
+handleKey (EventKey (Char 'z') Down _ _) w            = useEnergyP2 w 1
+handleKey (EventKey (Char 'x') Down _ _) w            = useEnergyP2 w 2
+handleKey (EventKey (Char 'c') Down _ _) w            = useEnergyP2 w 3
+handleKey (EventKey (Char 'v') Down _ _) w            = useEnergyP2 w 4
 
 handleKey _ w = w
